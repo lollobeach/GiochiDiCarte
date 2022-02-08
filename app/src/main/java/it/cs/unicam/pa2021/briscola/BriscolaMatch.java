@@ -56,6 +56,8 @@ public class BriscolaMatch extends AbstractMatch<BriscolaPlayer, BriscolaDeck, S
         BriscolaPlayer primoGiocatore = getSinglePlayerInGame(indicePrimoGiocatore);
         BriscolaPlayer secondoGiocatore = getSinglePlayerInGame(indiceSecondoGiocatore);
         System.out.println("Il giocatore iniziale è: " + primoGiocatore.toString());
-
+        BriscolaDeck mazzi = this.getSingleDeck(0);
+        primoGiocatore.pescaCarte(mazzi.getCarteMazzo(), 3);
+        secondoGiocatore.pescaCarte(mazzi.getCarteMazzo(), 3);
     }
 }

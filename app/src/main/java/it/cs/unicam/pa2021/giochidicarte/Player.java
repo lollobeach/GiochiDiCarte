@@ -78,6 +78,17 @@ public interface Player<C extends Card> {
      * Metodo che permette al giocatore
      * di pescare un certo numero di carte
      *
+     * @param from lista che indica da dove
+     *             pescare le carte
+     * @param carte numero di carte da pescare
+     */
+    void pescaCarte(List<C> from, int carte);
+
+    /**
+     * Metodo che permette al giocatore
+     * di pescare le carte in determinate
+     * posizioni
+     *
      * @param from lista che indica da dove pescare
      *             le carte
      * @param carte array di indici corrispondenti alle

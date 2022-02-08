@@ -4,6 +4,7 @@ import it.cs.unicam.pa2021.giochidicarte.AbstractPlayer;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class BriscolaPlayer extends AbstractPlayer<BriscolaCard> {
 
@@ -57,6 +58,10 @@ public class BriscolaPlayer extends AbstractPlayer<BriscolaCard> {
         this.getCarteInMano().add(from.remove(carta));
     }
 
+    @Override
+    public void pescaCarte(List<BriscolaCard> from, int carte) {
+        IntStream.range(0,carte).forEach(x -> pescaCarta(from, 0));
+    }
     @Override
     public String toString() {
         return "BriscolaPlayer{" +

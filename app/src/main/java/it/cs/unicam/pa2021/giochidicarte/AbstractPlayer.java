@@ -42,6 +42,9 @@ public abstract class AbstractPlayer<C extends Card> implements Player<C> {
     }
 
     @Override
+    public void pescaCarte(List<C> from, int carte) { throw new UnsupportedOperationException(); }
+
+    @Override
     public String toString() {
         return "AbstractPlayer{" +
                 "id=" + id +
