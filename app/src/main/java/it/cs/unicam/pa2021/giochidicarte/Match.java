@@ -123,7 +123,8 @@ public interface Match<P extends Player<? extends Card>,D extends Deck<? extends
     /**
      * Metodo che ritorna la lista
      * di mazzi usati nel gioco
-     * @return
+     *
+     * @return la lista di mazzi
      */
     List<D> getDeck();
 
@@ -162,9 +163,15 @@ public interface Match<P extends Player<? extends Card>,D extends Deck<? extends
     F getField();
 
     /**
-     * Metodo da implementare
-     * che permette di eseguire
-     * il gioco
+     * Metodo da utilizzare per
+     * preparare il campo e i giocatori
+     * per giocare la partita
+     */
+    void initialize();
+
+    /**
+     * Metodo da utilizzare per
+     * l'implementazione delle regole
      */
     void execute();
 }

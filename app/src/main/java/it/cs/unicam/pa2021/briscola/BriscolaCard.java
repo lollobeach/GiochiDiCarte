@@ -2,6 +2,10 @@ package it.cs.unicam.pa2021.briscola;
 
 import it.cs.unicam.pa2021.giochidicarte.SimpleCard;
 
+/**
+ * Classe che rappresenta una tipica carta
+ * da briscola avente un seme e una figura
+ */
 public class BriscolaCard extends SimpleCard {
 
     private final BriscolaSeeds seme;

@@ -3,14 +3,18 @@ package it.cs.unicam.pa2021.briscola;
 import it.cs.unicam.pa2021.giochidicarte.AbstractMatch;
 import it.cs.unicam.pa2021.giochidicarte.SimpleField;
 
-import java.io.InputStream;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
-import java.util.Scanner;
 import java.util.function.Predicate;
 import java.util.stream.IntStream;
 
+
+/**
+ * Classe che rappresenta un partita di briscola 1 vs 1.
+ * La lista dei giocatori deve contenere due giocatori e la lista
+ * dei mazzi un solo mazzo
+ */
 public class BriscolaMatch extends AbstractMatch<BriscolaPlayer, BriscolaDeck, SimpleField<BriscolaCard>> {
 
 
@@ -45,9 +49,7 @@ public class BriscolaMatch extends AbstractMatch<BriscolaPlayer, BriscolaDeck, S
     }
 
     @Override
-    public void execute() {
-        InputStream stream = System.in;
-        Scanner newScanner = new Scanner(stream);
+    public void initialize() {
         System.out.println("Benvenuti nel gioco della briscola");
         BriscolaCard cartaBriscola = briscola();
         System.out.println("La briscola di questa partita è: " + cartaBriscola.toString());
@@ -59,5 +61,10 @@ public class BriscolaMatch extends AbstractMatch<BriscolaPlayer, BriscolaDeck, S
         BriscolaDeck mazzi = this.getSingleDeck(0);
         primoGiocatore.pescaCarte(mazzi.getCarteMazzo(), 3);
         secondoGiocatore.pescaCarte(mazzi.getCarteMazzo(), 3);
+    }
+
+    @Override
+    public void execute() {
+        initialize();
     }
 }

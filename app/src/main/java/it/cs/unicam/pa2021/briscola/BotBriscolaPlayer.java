@@ -2,6 +2,10 @@ package it.cs.unicam.pa2021.briscola;
 
 import java.util.Random;
 
+/**
+ * Classe che rappresenta un bot contro
+ * cui giocare a briscola
+ */
 public class BotBriscolaPlayer extends BriscolaPlayer{
 
     public BotBriscolaPlayer(String nomeGiocatore) {

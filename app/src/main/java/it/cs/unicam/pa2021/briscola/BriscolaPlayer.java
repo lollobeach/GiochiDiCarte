@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
 
+/**
+ * Classe che rappresenta un tipico giocatore di briscola
+ */
 public class BriscolaPlayer extends AbstractPlayer<BriscolaCard> {
 
     private final String nomeGiocatore;

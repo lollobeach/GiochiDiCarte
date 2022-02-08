@@ -1,17 +1,12 @@
 package it.cs.unicam.pa2021.giochidicarte;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.stream.Collectors;
-
 
 /**
  * Interfaccia che rappresenta
  * le azioni elementari di un giocatore
  *
- * @param <C> tipo di carte con cui giocher&agrave; il giocatore
+ * @param <C> tipo di carte con cui il giocatore giocher&agrave;
  */
 public interface Player<C extends Card> {
 
@@ -49,26 +44,15 @@ public interface Player<C extends Card> {
 
      * @param carte array di indici per rappresentare le
      *              carte che si vogliono giocare
-     *
-     * @throws IllegalArgumentException se tra gli indici
-     * ci sono dei doppioni
      */
-    default List<C> giocaCarte(int... carte) {
-//        Set<Integer> check = new HashSet<>();
-//        Arrays.stream(carte).forEach(check::add);
-        List<Integer> listaControllo = Arrays.stream(carte).boxed().collect(Collectors.toList());
-        int controllo = (int) listaControllo.stream().filter(i -> Collections.frequency(listaControllo,i) > 1).count();
-        if (controllo > 0) { throw new IllegalArgumentException("Carte doppioni non valide"); }
-        List<C> carteGiocate = new ArrayList<>();
-        listaControllo.forEach(x -> carteGiocate.add(giocaCarta(x)));
-        return carteGiocate;
-    }
+    List<C> giocaCarte(int... carte);
 
     /**
      * Metodo che permette al giocatore
      * di pescare una carta
      *
-     * @param from
+     * @param from lista che indica da dove
+     *             pescare le carte
      * @param carta indice della carta che si vuole
  *              pescare
      */
@@ -93,16 +77,6 @@ public interface Player<C extends Card> {
      *             le carte
      * @param carte array di indici corrispondenti alle
      *              carte che si vogliono pescare
-     *
-     * @throws IllegalArgumentException se tra gli indici
-     * ci sono dei doppioni
      */
-    default void pescaCarte(List<C> from, int... carte) {
-//        Set<Integer> check = new HashSet<>();
-//        Arrays.stream(carte).forEach(check::add);
-        List<Integer> listaControllo = Arrays.stream(carte).boxed().collect(Collectors.toList());
-        int controllo = (int) listaControllo.stream().filter(i -> Collections.frequency(listaControllo,i) > 1).count();
-        if (controllo > 0) { throw new IllegalArgumentException("Carte doppioni non valide"); }
-        listaControllo.forEach(x -> pescaCarta(from,x));
-    }
+    void pescaCarte(List<C> from, int... carte);
 }

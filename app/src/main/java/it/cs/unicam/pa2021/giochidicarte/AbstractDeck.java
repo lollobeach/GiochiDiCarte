@@ -6,9 +6,7 @@ import java.util.List;
 /**
  * Classe astratta che, tramite l'implementazione
  * dell'interfaccia Deck, permette di andare a
- * definire un generico mazzo, il quale pu&ograve;
- * essere specializzato nel momento in cui si estende
- * questa classe
+ * definire un generico mazz.
  *
  * @param <C> tipo di carte contenute
  *           dal mazzo

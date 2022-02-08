@@ -2,11 +2,12 @@ package it.cs.unicam.pa2021.briscola;
 
 import it.cs.unicam.pa2021.giochidicarte.AbstractDeck;
 
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
-import java.util.stream.IntStream;
 
+/**
+ * Classe che rappresenta un tipico mazzo di
+ * 40 carte da briscola
+ */
 public class BriscolaDeck extends AbstractDeck<BriscolaCard> {
 
     public BriscolaDeck() {

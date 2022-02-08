@@ -7,7 +7,7 @@ import java.util.List;
  * dell'interfaccia Player, permette di andare a definire
  * un generico giocatore di carte.
  *
- * @param <C> tipo di carte con cui giocher&agrave; il giocatore
+ * @param <C> tipo di carte con cui il giocatore giocher&agrave;
  */
 public abstract class AbstractPlayer<C extends Card> implements Player<C> {
 
@@ -37,12 +37,18 @@ public abstract class AbstractPlayer<C extends Card> implements Player<C> {
     public abstract C giocaCarta(int carta);
 
     @Override
+    public List<C> giocaCarte(int... carte) { throw new UnsupportedOperationException(); }
+
+    @Override
     public void pescaCarta(List<C> from, int carta) {
         throw new UnsupportedOperationException();
     }
 
     @Override
     public void pescaCarte(List<C> from, int carte) { throw new UnsupportedOperationException(); }
+
+    @Override
+    public void pescaCarte(List<C> from, int... carte) { throw new UnsupportedOperationException(); }
 
     @Override
     public String toString() {
