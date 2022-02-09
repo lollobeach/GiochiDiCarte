@@ -1,35 +1,17 @@
 package it.cs.unicam.pa2021.briscola;
 
-import it.cs.unicam.pa2021.giochidicarte.SimpleCard;
+import it.cs.unicam.pa2021.giochidicarte.classiccards.ClassicCard;
+import it.cs.unicam.pa2021.giochidicarte.classiccards.ClassicPair;
+import it.cs.unicam.pa2021.giochidicarte.classiccards.TrevigianeFigures;
+import it.cs.unicam.pa2021.giochidicarte.classiccards.TrevigianeSeeds;
 
 /**
  * Classe che rappresenta una tipica carta
  * da briscola avente un seme e una figura
  */
-public class BriscolaCard extends SimpleCard {
+public class BriscolaCard extends ClassicCard<TrevigianeSeeds, TrevigianeFigures> {
 
-    private final BriscolaSeeds seme;
-    private final BriscolaFigures figura;
-
-    public BriscolaCard(String id, int valore, BriscolaSeeds seme, BriscolaFigures figura) {
-        super(id, valore);
-        this.seme = seme;
-        this.figura = figura;
-    }
-
-    public BriscolaSeeds getSeme() {
-        return this.seme;
-    }
-
-    public BriscolaFigures getFigura() {
-        return this.figura;
-    }
-
-    @Override
-    public String toString() {
-        return "BriscolaCard{" +
-                "seme=" + seme +
-                ", figura=" + figura +
-                '}';
+    public BriscolaCard(int id, TrevigianeSeeds seme, TrevigianeFigures figura) {
+        super(new ClassicPair<TrevigianeSeeds>(id,seme),figura);
     }
 }

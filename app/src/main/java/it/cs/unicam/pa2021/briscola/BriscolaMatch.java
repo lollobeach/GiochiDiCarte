@@ -1,7 +1,7 @@
 package it.cs.unicam.pa2021.briscola;
 
 import it.cs.unicam.pa2021.giochidicarte.AbstractMatch;
-import it.cs.unicam.pa2021.giochidicarte.SimpleField;
+import it.cs.unicam.pa2021.giochidicarte.field.SimpleField;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,18 +15,18 @@ import java.util.stream.IntStream;
  * La lista dei giocatori deve contenere due giocatori e la lista
  * dei mazzi un solo mazzo
  */
-public class BriscolaMatch extends AbstractMatch<BriscolaPlayer, BriscolaDeck, SimpleField<BriscolaCard>> {
+public class BriscolaMatch extends AbstractMatch<BriscolaPlayerWithHand, BriscolaNeatDeck, SimpleField<BriscolaCard>> {
 
 
-    public BriscolaMatch(List<BriscolaPlayer> giocatori, List<BriscolaDeck> mazzi, SimpleField<BriscolaCard> campoDaGioco) {
+    public BriscolaMatch(List<BriscolaPlayerWithHand> giocatori, List<BriscolaNeatDeck> mazzi, SimpleField<BriscolaCard> campoDaGioco) {
         super(giocatori, mazzi, campoDaGioco);
         if (giocatori.size() > 2) { throw new IllegalArgumentException("Si può giocare con due giocatori"); }
         if (mazzi.size() > 1) { throw new IllegalArgumentException("Si può giocare con un singolo mazzo"); }
     }
 
     @Override
-    public BriscolaPlayer getWinnerPlayer(Predicate<BriscolaPlayer> p) {
-        Optional<BriscolaPlayer> opt = getPlayersInGame().stream().filter(p).findFirst();
+    public BriscolaPlayerWithHand getWinnerPlayer(Predicate<BriscolaPlayerWithHand> p) {
+        Optional<BriscolaPlayerWithHand> opt = getPlayersInGame().stream().filter(p).findFirst();
         if (opt.isPresent()) {
             System.out.println("Il vincitore è il giocatore: " + opt.get().getNomeGiocatore() + " - " + opt.get().getIdPlayer());
             return opt.get(); }
@@ -44,8 +44,8 @@ public class BriscolaMatch extends AbstractMatch<BriscolaPlayer, BriscolaDeck, S
     }
 
     private BriscolaCard briscola() {
-        IntStream.range(0,3).forEach(x -> getSingleDeck(0).mischiaMazzo());
-        return getSingleDeck(0).rimuoviCarta(0);
+        IntStream.range(0,3).forEach(x -> getSingleDeck(0).shuffleDeck());
+        return getSingleDeck(0).removeCard(0);
     }
 
     @Override
@@ -55,12 +55,12 @@ public class BriscolaMatch extends AbstractMatch<BriscolaPlayer, BriscolaDeck, S
         System.out.println("La briscola di questa partita è: " + cartaBriscola.toString());
         int indicePrimoGiocatore = primoGiocatore();
         int indiceSecondoGiocatore = secondoGiocatore(indicePrimoGiocatore);
-        BriscolaPlayer primoGiocatore = getSinglePlayerInGame(indicePrimoGiocatore);
-        BriscolaPlayer secondoGiocatore = getSinglePlayerInGame(indiceSecondoGiocatore);
+        BriscolaPlayerWithHand primoGiocatore = getSinglePlayerInGame(indicePrimoGiocatore);
+        BriscolaPlayerWithHand secondoGiocatore = getSinglePlayerInGame(indiceSecondoGiocatore);
         System.out.println("Il giocatore iniziale è: " + primoGiocatore.toString());
-        BriscolaDeck mazzi = this.getSingleDeck(0);
-        primoGiocatore.pescaCarte(mazzi.getCarteMazzo(), 3);
-        secondoGiocatore.pescaCarte(mazzi.getCarteMazzo(), 3);
+        BriscolaNeatDeck mazzi = this.getSingleDeck(0);
+        primoGiocatore.pescaCarte(mazzi.getCardsDeck(), 3);
+        secondoGiocatore.pescaCarte(mazzi.getCardsDeck(), 3);
     }
 
     @Override

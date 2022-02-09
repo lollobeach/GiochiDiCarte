@@ -2,25 +2,12 @@ package it.cs.unicam.pa2021.giochidicarte;
 
 /**
  * Interfaccia che definisce
- * una generica
+ * come una carta dovrebbe essere
+ * identificata
  */
-public interface Card {
+public interface Card<T> {
 
-    /**
-     * Metodo che ritorna il valore
-     * della carta
-     *
-     * @return intero rappresentante il valore
-     */
-    int getValore();
+      T getIdentity();
 
-    /**
-     * Metodo che permette di modificare
-     * il valore della carta
-     *
-     * @param nuovoValore intero rappresentante
-     *                    il nuovo valore da
-     *                    aggiungere
-     */
-    void setValore(int nuovoValore);
+      String toString();
 }

@@ -1,6 +1,7 @@
 package it.cs.unicam.pa2021.briscola;
 
-import it.cs.unicam.pa2021.giochidicarte.AbstractPlayer;
+import it.cs.unicam.pa2021.giochidicarte.player.AbstractPlayerWithHand;
+import it.cs.unicam.pa2021.giochidicarte.PileCards;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,14 +10,14 @@ import java.util.stream.IntStream;
 /**
  * Classe che rappresenta un tipico giocatore di briscola
  */
-public class BriscolaPlayer extends AbstractPlayer<BriscolaCard> {
+public class BriscolaPlayerWithHand extends AbstractPlayerWithHand<BriscolaCard> {
 
     private final String nomeGiocatore;
     private final List<BriscolaCard> carteInMano;
     private final List<BriscolaCard> carteInPossesso;
     private int punti;
 
-    public BriscolaPlayer(String nomeGiocatore) {
+    public BriscolaPlayerWithHand(String nomeGiocatore) {
         this.nomeGiocatore = nomeGiocatore;
         this.carteInMano = new ArrayList<>();
         this.carteInPossesso = new ArrayList<>();
@@ -57,17 +58,17 @@ public class BriscolaPlayer extends AbstractPlayer<BriscolaCard> {
     }
 
     @Override
-    public void pescaCarta(List<BriscolaCard> from, int carta) {
+    public void pescaCarta(PileCards<BriscolaCard> from, int carta) {
         this.getCarteInMano().add(from.remove(carta));
     }
 
     @Override
-    public void pescaCarte(List<BriscolaCard> from, int carte) {
+    public void pescaCarte(PileCards<BriscolaCard> from, int carte) {
         IntStream.range(0,carte).forEach(x -> pescaCarta(from, 0));
     }
     @Override
     public String toString() {
-        return "BriscolaPlayer{" +
+        return "BriscolaPlayerWithHand{" +
                 "nomeGiocatore='" + nomeGiocatore + '\'' +
                 '}';
     }
