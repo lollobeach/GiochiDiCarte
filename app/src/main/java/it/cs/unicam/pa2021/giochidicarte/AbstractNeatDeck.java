@@ -5,22 +5,22 @@ import java.util.List;
 
 /**
  * Classe astratta che, tramite l'implementazione
- * dell'interfaccia Deck, permette di andare a
+ * dell'interfaccia NeatDeck, permette di andare a
  * definire un generico mazz.
  *
  * @param <C> tipo di carte contenute
  *           dal mazzo
  */
-public abstract class AbstractDeck<C extends Card> implements Deck<C> {
+public abstract class AbstractNeatDeck<C extends Card> implements NeatDeck<C> {
 
     private final List<C> carte;
 
-    public AbstractDeck() {
+    public AbstractNeatDeck() {
         this.carte = new ArrayList<>();
     }
 
     @Override
-    public List<C> getCarteMazzo() {
+    public List<C> getCardsDeck() {
         return this.carte;
     }
 
@@ -34,11 +34,11 @@ public abstract class AbstractDeck<C extends Card> implements Deck<C> {
      * @return la carta che &egrave; stata rimossa
      */
     @Override
-    public C rimuoviCarta(int pos){
-        if (pos < 0 || pos > nCarteMazzo() - 1) {
+    public C removeCard(int pos){
+        if (pos < 0 || pos > nCardsDeck() - 1) {
             throw new IndexOutOfBoundsException("Posizione non valida");
         }
-        return getCarteMazzo().remove(pos);
+        return getCardsDeck().remove(pos);
     }
 
     /**
@@ -53,11 +53,11 @@ public abstract class AbstractDeck<C extends Card> implements Deck<C> {
      * rimossa
      */
     @Override
-    public int rimuoviCarta(C carta) {
+    public int removeCard(C carta) {
         if (carta == null) { throw new NullPointerException("Carta non selezionata"); }
-        if (!cartaPresente(carta)) { throw new IllegalArgumentException("Carta non presente nel mazzo"); }
-        getCarteMazzo().remove(carta);
-        return getCarteMazzo().lastIndexOf(carta);
+        if (!cardPresent(carta)) { throw new IllegalArgumentException("Carta non presente nel mazzo"); }
+        getCardsDeck().remove(carta);
+        return getCardsDeck().lastIndexOf(carta);
     }
 
     @Override
@@ -75,12 +75,12 @@ public abstract class AbstractDeck<C extends Card> implements Deck<C> {
      * lista non è presente nel mazzo
      */
     @Override
-    public void rimuoviCarte(List<C> carte) {
+    public void removeCards(List<C> carte) {
         if (carte == null || carte.size() == 0) { throw new NullPointerException("Carte non selezionate"); }
-        List<C> listaControllo = getCarteMazzo();
+        List<C> listaControllo = getCardsDeck();
         int check = (int) carte.stream().filter(listaControllo::remove).count();
         if (check < carte.size()) { throw new IllegalArgumentException("Non tutte le carte nella lista sono presenti nel mazzo"); }
-        getCarteMazzo().removeAll(carte);
+        getCardsDeck().removeAll(carte);
     }
 
     @Override
@@ -93,31 +93,31 @@ public abstract class AbstractDeck<C extends Card> implements Deck<C> {
      * @param pos posizione nel mazzo in cui si
      *            vuole aggiungere la carta
      *
+     * @param card carta che si vuole aggiungere
      * @throws IndexOutOfBoundsException se pos &egrave;
      * minore di 0 o maggiore del numero delle carte nel mazzo
      *
-     * @param carta carta che si vuole aggiungere
      */
     @Override
-    public void aggiungiCarta(int pos, C carta) {
-        if (pos < 0 || pos > nCarteMazzo() - 1) { throw new IndexOutOfBoundsException("Posizione non valida"); }
-        if (carta == null) { throw new NullPointerException("Carta non selezionata"); }
-        if (cartaPresente(carta)) { throw new IllegalArgumentException("Carta gia presente nel mazzo"); }
-        getCarteMazzo().add(pos, carta);
+    public void addCard(int pos, C card) {
+        if (pos < 0 || pos > nCardsDeck() - 1) { throw new IndexOutOfBoundsException("Posizione non valida"); }
+        if (card == null) { throw new NullPointerException("Carta non selezionata"); }
+        if (cardPresent(card)) { throw new IllegalArgumentException("Carta gia presente nel mazzo"); }
+        getCardsDeck().add(pos, card);
     }
 
     @Override
-    public void aggiungiCarte(List<C> carte) {
+    public void addCards(List<C> carte) {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public void aggiungiCarte(int pos, List<C> carte) {
+    public void addCards(int pos, List<C> cards) {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public void mischiaMazzo() {
+    public void shuffleDeck() {
         throw new UnsupportedOperationException();
     }
 }

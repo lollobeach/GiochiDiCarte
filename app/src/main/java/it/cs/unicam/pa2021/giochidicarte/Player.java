@@ -8,15 +8,7 @@ import java.util.List;
  *
  * @param <C> tipo di carte con cui il giocatore giocher&agrave;
  */
-public interface Player<C extends Card> {
-
-    /**
-     * Metodo che ritorna tutte le
-     * carte in mano del giocatore
-     *
-     * @return lista di carte in mano
-     */
-    List<C> getCarteInMano();
+public interface Player<C extends Card> extends PlayerHand<C> {
 
     /**
      * Metodo che ritorna le
@@ -50,33 +42,28 @@ public interface Player<C extends Card> {
     /**
      * Metodo che permette al giocatore
      * di pescare una carta
-     *
-     * @param from lista che indica da dove
+     *  @param from lista che indica da dove
      *             pescare le carte
      * @param carta indice della carta che si vuole
- *              pescare
      */
-    void pescaCarta(List<C> from, int carta);
+    void pescaCarta(PileCards<C> from, int carta);
 
     /**
      * Metodo che permette al giocatore
      * di pescare un certo numero di carte
-     *
-     * @param from lista che indica da dove
+     *  @param from lista che indica da dove
      *             pescare le carte
      * @param carte numero di carte da pescare
      */
-    void pescaCarte(List<C> from, int carte);
+    void pescaCarte(PileCards<C> from, int carte);
 
     /**
      * Metodo che permette al giocatore
      * di pescare le carte in determinate
      * posizioni
-     *
-     * @param from lista che indica da dove pescare
+     *  @param from lista che indica da dove pescare
      *             le carte
      * @param carte array di indici corrispondenti alle
-     *              carte che si vogliono pescare
      */
-    void pescaCarte(List<C> from, int... carte);
+    void pescaCarte(PileCards<C> from, int... carte);
 }

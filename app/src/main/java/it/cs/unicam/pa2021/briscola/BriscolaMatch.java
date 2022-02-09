@@ -15,10 +15,10 @@ import java.util.stream.IntStream;
  * La lista dei giocatori deve contenere due giocatori e la lista
  * dei mazzi un solo mazzo
  */
-public class BriscolaMatch extends AbstractMatch<BriscolaPlayer, BriscolaDeck, SimpleField<BriscolaCard>> {
+public class BriscolaMatch extends AbstractMatch<BriscolaPlayer, BriscolaNeatDeck, SimpleField<BriscolaCard>> {
 
 
-    public BriscolaMatch(List<BriscolaPlayer> giocatori, List<BriscolaDeck> mazzi, SimpleField<BriscolaCard> campoDaGioco) {
+    public BriscolaMatch(List<BriscolaPlayer> giocatori, List<BriscolaNeatDeck> mazzi, SimpleField<BriscolaCard> campoDaGioco) {
         super(giocatori, mazzi, campoDaGioco);
         if (giocatori.size() > 2) { throw new IllegalArgumentException("Si può giocare con due giocatori"); }
         if (mazzi.size() > 1) { throw new IllegalArgumentException("Si può giocare con un singolo mazzo"); }
@@ -44,8 +44,8 @@ public class BriscolaMatch extends AbstractMatch<BriscolaPlayer, BriscolaDeck, S
     }
 
     private BriscolaCard briscola() {
-        IntStream.range(0,3).forEach(x -> getSingleDeck(0).mischiaMazzo());
-        return getSingleDeck(0).rimuoviCarta(0);
+        IntStream.range(0,3).forEach(x -> getSingleDeck(0).shuffleDeck());
+        return getSingleDeck(0).removeCard(0);
     }
 
     @Override
@@ -58,9 +58,9 @@ public class BriscolaMatch extends AbstractMatch<BriscolaPlayer, BriscolaDeck, S
         BriscolaPlayer primoGiocatore = getSinglePlayerInGame(indicePrimoGiocatore);
         BriscolaPlayer secondoGiocatore = getSinglePlayerInGame(indiceSecondoGiocatore);
         System.out.println("Il giocatore iniziale è: " + primoGiocatore.toString());
-        BriscolaDeck mazzi = this.getSingleDeck(0);
-        primoGiocatore.pescaCarte(mazzi.getCarteMazzo(), 3);
-        secondoGiocatore.pescaCarte(mazzi.getCarteMazzo(), 3);
+        BriscolaNeatDeck mazzi = this.getSingleDeck(0);
+        primoGiocatore.pescaCarte(mazzi.getCardsDeck(), 3);
+        secondoGiocatore.pescaCarte(mazzi.getCardsDeck(), 3);
     }
 
     @Override

@@ -16,7 +16,7 @@ import java.util.function.Predicate;
  * @param <D> tipo di mazzo usato per la partita
  * @param <F> tipo di campo su cui si gioca la partita
  */
-public abstract class AbstractMatch<P extends Player<? extends Card>,D extends Deck<? extends Card>,F extends Field<? extends Card>> implements Match<P,D,F> {
+public abstract class AbstractMatch<P extends Player<? extends Card>,D extends NeatDeck<? extends Card>,F extends Field<? extends Card>> implements Match<P,D,F> {
 
     private final List<P> listaGiocatori;
     private List<D> listaMazzi;
