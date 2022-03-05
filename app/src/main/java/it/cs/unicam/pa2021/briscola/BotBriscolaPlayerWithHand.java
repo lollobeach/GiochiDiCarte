@@ -6,9 +6,9 @@ import java.util.Random;
  * Classe che rappresenta un bot contro
  * cui giocare a briscola
  */
-public class BotBriscolaPlayer extends BriscolaPlayer{
+public class BotBriscolaPlayerWithHand extends BriscolaPlayerWithHand {
 
-    public BotBriscolaPlayer(String nomeGiocatore) {
+    public BotBriscolaPlayerWithHand(String nomeGiocatore) {
         super(nomeGiocatore);
     }
 

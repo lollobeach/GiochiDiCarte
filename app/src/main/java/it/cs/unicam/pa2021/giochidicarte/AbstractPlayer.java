@@ -9,7 +9,7 @@ import java.util.List;
  *
  * @param <C> tipo di carte con cui il giocatore giocher&agrave;
  */
-public abstract class AbstractPlayer<C extends Card> implements Player<C> {
+public abstract class AbstractPlayer<C extends Card<?>> implements Player<C> {
 
     private static int idPlayer;
 
@@ -40,15 +40,15 @@ public abstract class AbstractPlayer<C extends Card> implements Player<C> {
     public List<C> giocaCarte(int... carte) { throw new UnsupportedOperationException(); }
 
     @Override
-    public void pescaCarta(List<C> from, int carta) {
+    public void pescaCarta(PileCards<C> from, int carta) {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public void pescaCarte(List<C> from, int carte) { throw new UnsupportedOperationException(); }
+    public void pescaCarte(PileCards<C> from, int carte) { throw new UnsupportedOperationException(); }
 
     @Override
-    public void pescaCarte(List<C> from, int... carte) { throw new UnsupportedOperationException(); }
+    public void pescaCarte(PileCards<C> from, int... carte) { throw new UnsupportedOperationException(); }
 
     @Override
     public String toString() {
