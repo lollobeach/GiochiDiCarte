@@ -33,7 +33,7 @@ public abstract class AbstractDeck<C extends Card<?>> implements Deck<C> {
     public abstract void addCards(List<C> cards);
 
     @Override
-    public List<C> removeNCards(int n) { throw new UnsupportedOperationException(); }
+    public List<C> removeNCardsFromBottom(int n) { throw new UnsupportedOperationException(); }
 
     @Override
     public List<C> removeNCardsFromPosition(int n, int pos) { throw new UnsupportedOperationException(); }

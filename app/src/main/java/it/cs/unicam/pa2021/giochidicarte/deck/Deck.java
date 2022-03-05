@@ -55,14 +55,14 @@ public interface Deck<C extends Card<?>> extends PileCards<C> {
 
     /**
      * Metodo che permette di rimuovere
-     * un numero di carte dal mazzo
+     * un numero di carte dal fondo del mazzo
      *
      * @param n numero di carte che si vogliono
      *          eliminare
      *
      * @return lista di carte che sono state rimosse
      */
-    List<C> removeNCards(int n);
+    List<C> removeNCardsFromBottom(int n);
 
     /**
      * Metodo che permette di rimuovere

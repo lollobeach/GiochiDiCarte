@@ -42,7 +42,7 @@ public class TrevigianeDeck implements Deck<TrevigianaCard> {
     }
 
     @Override
-    public List<TrevigianaCard> removeNCards(int n) {
+    public List<TrevigianaCard> removeNCardsFromBottom(int n) {
         return null;
     }
 
