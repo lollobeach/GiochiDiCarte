@@ -8,7 +8,7 @@ import java.util.List;
  *
  * @param <C> tipo di carte con cui il giocatore giocher&agrave;
  */
-public interface Player<C extends Card> extends PlayerHand<C> {
+public interface Player<C extends Card<?>> extends PlayerHand<C> {
 
     /**
      * Metodo che ritorna le
