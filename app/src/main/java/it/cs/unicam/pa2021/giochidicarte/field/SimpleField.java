@@ -24,15 +24,6 @@ public abstract class SimpleField<C extends Card<?>> implements Field<C> {
         return this.cardsInGame;
     }
 
-    /**
-     * @param card la carta che deve essere
-     *              aggiunta
-     *
-     * @throws NullPointerException se la carta che
-     * si vuole aggiungere &egrave; null
-     * @throws IllegalArgumentException se la carta che si
-     * vuole aggiungere &egrave; gi&agrave; presente
-     */
     @Override
     public abstract void addCard(C card);
 
@@ -43,16 +34,6 @@ public abstract class SimpleField<C extends Card<?>> implements Field<C> {
         this.cardsInGame.add(card);
      */
 
-    /**
-     * @param cards lista contenenti le carte che si vogliono
-     *              aggiungere
-     *
-     * @throws NullPointerException se la lista delle carte
-     * &egrave; null o se &egrave; vuota
-     * @throws IllegalArgumentException se la lista:
-     *  - contiene carte duplicate
-     *  - contiene almeno una carta gi&agrave; presente nel mazzo
-     */
     @Override
     public abstract void addCards(List<C> cards);
 
