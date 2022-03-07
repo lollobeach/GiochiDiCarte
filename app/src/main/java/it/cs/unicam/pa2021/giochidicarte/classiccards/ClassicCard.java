@@ -6,10 +6,13 @@ import it.cs.unicam.pa2021.giochidicarte.Card;
  * Classe che definisce una
  * classica carta da gioco
  * avente un seme e una figura
+ *
+ * @param <S> tipo di seme utilizzato
+ * @param <F> tipo di figura utilizzata
  */
 public abstract class ClassicCard<S extends Seeds, F extends Figures> implements Card<ClassicPair<S>> {
 
-    private final ClassicPair<S> id;
+    private ClassicPair<S> id;
     private F figures;
 
     public ClassicCard(ClassicPair<S> id, F figures) {
@@ -23,8 +26,7 @@ public abstract class ClassicCard<S extends Seeds, F extends Figures> implements
     }
 
     public void setId(int newIndex, S newSeed) {
-        this.id.setId(newIndex);
-        this.id.setSeed(newSeed);
+        this.id = new ClassicPair<>(newIndex, newSeed);
     }
 
     public int getIndex() { return this.id.getId(); }
@@ -51,5 +53,23 @@ public abstract class ClassicCard<S extends Seeds, F extends Figures> implements
                 "id=" + id +
                 ", figures=" + figures +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ClassicCard<?, ?> that = (ClassicCard<?, ?>) o;
+
+        if (!id.equals(that.id)) return false;
+        return figures.equals(that.figures);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id.hashCode();
+        result = 31 * result + figures.hashCode();
+        return result;
     }
 }
