@@ -11,11 +11,11 @@ import java.util.List;
  *
  * @param <C> tipo di carte che verranno giocate
  */
-public abstract class SimpleField<C extends Card<?>> implements Field<C> {
+public abstract class AbstractField<C extends Card<?>> implements Field<C> {
 
     private final List<C> cardsInGame;
 
-    public SimpleField() {
+    public AbstractField() {
         this.cardsInGame = new ArrayList<>();
     }
 

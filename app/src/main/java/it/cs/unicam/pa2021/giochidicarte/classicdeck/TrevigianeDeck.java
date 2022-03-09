@@ -2,9 +2,9 @@ package it.cs.unicam.pa2021.giochidicarte.classicdeck;
 
 import it.cs.unicam.pa2021.giochidicarte.deck.AbstractDeck;
 import it.cs.unicam.pa2021.giochidicarte.classiccards.ClassicPair;
-import it.cs.unicam.pa2021.giochidicarte.classiccards.TrevigianaCard;
-import it.cs.unicam.pa2021.giochidicarte.classiccards.TrevigianeFigures;
-import it.cs.unicam.pa2021.giochidicarte.classiccards.TrevigianeSeeds;
+import it.cs.unicam.pa2021.giochidicarte.classiccards.trevigianecards.TrevigianaCard;
+import it.cs.unicam.pa2021.giochidicarte.classiccards.trevigianecards.TrevigianeFigures;
+import it.cs.unicam.pa2021.giochidicarte.classiccards.trevigianecards.TrevigianeSeeds;
 
 import java.util.Collections;
 import java.util.List;

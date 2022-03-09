@@ -2,6 +2,13 @@ package it.cs.unicam.pa2021.giochidicarte.player;
 
 import it.cs.unicam.pa2021.giochidicarte.Card;
 
+/**
+ * Interfaccia che rappresenta
+ * un giocatore di carte
+ *
+ * @param <C> carte utilizzate dal
+ *           giocatore
+ */
 public interface Player<C extends Card<?>> {
 
     /**

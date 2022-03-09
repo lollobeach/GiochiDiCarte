@@ -1,70 +1,78 @@
-//package it.cs.unicam.pa2021.briscola;
-//
-//import it.cs.unicam.pa2021.giochidicarte.AbstractMatch;
-//import it.cs.unicam.pa2021.giochidicarte.SimpleField;
-//
-//import java.util.List;
-//import java.util.Optional;
-//import java.util.Random;
-//import java.util.function.Predicate;
-//import java.util.stream.IntStream;
-//
-//
-///**
-// * Classe che rappresenta un partita di briscola 1 vs 1.
-// * La lista dei giocatori deve contenere due giocatori e la lista
-// * dei mazzi un solo mazzo
-// */
-//public class BriscolaMatch extends AbstractMatch<BriscolaPlayer, BriscolaDeck, SimpleField<BriscolaCard>> {
-//
-//
-//    public BriscolaMatch(List<BriscolaPlayer> giocatori, List<BriscolaDeck> mazzi, SimpleField<BriscolaCard> campoDaGioco) {
-//        super(giocatori, mazzi, campoDaGioco);
-//        if (giocatori.size() > 2) { throw new IllegalArgumentException("Si può giocare con due giocatori"); }
-//        if (mazzi.size() > 1) { throw new IllegalArgumentException("Si può giocare con un singolo mazzo"); }
-//    }
-//
-//    @Override
-//    public BriscolaPlayer getWinnerPlayer(Predicate<BriscolaPlayer> p) {
-//        Optional<BriscolaPlayer> opt = getPlayersInGame().stream().filter(p).findFirst();
-//        if (opt.isPresent()) {
-//            System.out.println("Il vincitore è il giocatore: " + opt.get().getNomeGiocatore() + " - " + opt.get().getIdPlayer());
-//            return opt.get(); }
-//        return null;
-//    }
-//
-//    private int primoGiocatore() {
-//        Random random = new Random();
-//        return random.nextInt(2);
-//    }
-//
-//    private int secondoGiocatore(int i) {
-//        if (i == 0) { return 1; }
-//        return 0;
-//    }
-//
-//    private BriscolaCard briscola() {
-//        IntStream.range(0,3).forEach(x -> getSingleDeck(0).mischiaMazzo());
-//        return getSingleDeck(0).rimuoviCarta(0);
-//    }
-//
-//    @Override
-//    public void initialize() {
-//        System.out.println("Benvenuti nel gioco della briscola");
-//        BriscolaCard cartaBriscola = briscola();
-//        System.out.println("La briscola di questa partita è: " + cartaBriscola.toString());
-//        int indicePrimoGiocatore = primoGiocatore();
-//        int indiceSecondoGiocatore = secondoGiocatore(indicePrimoGiocatore);
-//        BriscolaPlayer primoGiocatore = getSinglePlayerInGame(indicePrimoGiocatore);
-//        BriscolaPlayer secondoGiocatore = getSinglePlayerInGame(indiceSecondoGiocatore);
-//        System.out.println("Il giocatore iniziale è: " + primoGiocatore.toString());
-//        BriscolaDeck mazzi = this.getSingleDeck(0);
-//        primoGiocatore.pescaCarte(mazzi.getCarteMazzo(), 3);
-//        secondoGiocatore.pescaCarte(mazzi.getCarteMazzo(), 3);
-//    }
-//
-//    @Override
-//    public void execute() {
-//        initialize();
-//    }
-//}
+package it.cs.unicam.pa2021.briscola;
+
+import it.cs.unicam.pa2021.giochidicarte.classiccards.trevigianecards.TrevigianaCard;
+import it.cs.unicam.pa2021.giochidicarte.classicdeck.TrevigianeDeck;
+import it.cs.unicam.pa2021.giochidicarte.match.AbstractMatchMultiplayer;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.Random;
+import java.util.function.Predicate;
+
+/**
+ * Classe che rappresenta un partita di briscola 1 vs 1
+ */
+public class BriscolaMatch extends AbstractMatchMultiplayer<BriscolaPlayer, TrevigianeDeck, BriscolaField> {
+
+    public BriscolaMatch(List<BriscolaPlayer> players, TrevigianeDeck deck, BriscolaField briscolaField) {
+        super(players, deck, briscolaField);
+    }
+
+    @Override
+    public BriscolaPlayer getWinnerPlayer(Predicate<BriscolaPlayer> p) {
+        Optional<BriscolaPlayer> opt = getPlayersInGame().stream().filter(p).findFirst();
+        if (opt.isPresent()) {
+            System.out.println("Il vincitore è il giocatore: " + opt.get().getName() + " - " + opt.get().getId());
+            return opt.get(); }
+        return null;
+    }
+
+    private int first() {
+        Random random = new Random();
+        return random.nextInt(2) + 1;
+    }
+
+    private int second(int i) {
+        if (i == 1) { return 2; }
+        return 1;
+    }
+
+    private TrevigianaCard briscola() {
+        this.getDeck().shuffleDeck(3);
+        return this.getDeck().removeCard(0);
+    }
+
+    private BriscolaPlayerBot inizializationPlayers(BriscolaPlayer... players) {
+        BriscolaPlayerBot bot;
+        if (players[0] instanceof BriscolaPlayerBot) {
+            bot = (BriscolaPlayerBot) players[0];
+            bot.getHand().addCards(this.getDeck().removeNCardsFromTop(3));
+            players[1].getHand().addCards(this.getDeck().removeNCardsFromTop(3));
+        } else {
+            players[0].getHand().addCards(this.getDeck().removeNCardsFromTop(3));
+            bot = (BriscolaPlayerBot) players[1];
+            bot.getHand().addCards(this.getDeck().removeNCardsFromTop(3));
+        }
+        return bot;
+    }
+
+    @Override
+    public void initialize() {
+        System.out.println("Benvenuti nel gioco della briscola");
+        TrevigianaCard cartaBriscola = briscola();
+        this.getField().addCard(cartaBriscola);
+        System.out.println("La briscola di questa partita è: " + cartaBriscola);
+        int idFirstPlayer = first();
+        int idSecondPlayer = second(idFirstPlayer);
+        BriscolaPlayer firstPlayer = this.getSinglePlayerInGameById(idFirstPlayer);
+        BriscolaPlayer secondPlayer = this.getSinglePlayerInGameById(idSecondPlayer);
+        BriscolaPlayerBot bot = this.inizializationPlayers(firstPlayer,secondPlayer);
+        System.out.println("Il giocatore iniziale è: " + firstPlayer);
+    }
+
+    @Override
+    public void execute() {
+        initialize();
+
+    }
+}

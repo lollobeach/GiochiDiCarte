@@ -2,9 +2,9 @@ package it.cs.unicam.pa2021.giochidicarte.classicdeck;
 
 import it.cs.unicam.pa2021.giochidicarte.deck.AbstractDeck;
 import it.cs.unicam.pa2021.giochidicarte.classiccards.ClassicPair;
-import it.cs.unicam.pa2021.giochidicarte.classiccards.FranceseCard;
-import it.cs.unicam.pa2021.giochidicarte.classiccards.FrenchFigures;
-import it.cs.unicam.pa2021.giochidicarte.classiccards.FrenchSeeds;
+import it.cs.unicam.pa2021.giochidicarte.classiccards.frenchcards.FranceseCard;
+import it.cs.unicam.pa2021.giochidicarte.classiccards.frenchcards.FrenchFigures;
+import it.cs.unicam.pa2021.giochidicarte.classiccards.frenchcards.FrenchSeeds;
 
 import java.util.Collections;
 import java.util.List;

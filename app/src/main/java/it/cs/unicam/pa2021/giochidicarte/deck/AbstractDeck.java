@@ -1,8 +1,6 @@
 package it.cs.unicam.pa2021.giochidicarte.deck;
 
 import it.cs.unicam.pa2021.giochidicarte.Card;
-import it.cs.unicam.pa2021.giochidicarte.deck.Deck;
-import it.cs.unicam.pa2021.giochidicarte.deck.Direction;
 
 import java.util.ArrayList;
 import java.util.Collections;
