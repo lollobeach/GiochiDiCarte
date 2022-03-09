@@ -33,8 +33,10 @@ public interface Match<D extends Deck<? extends Card<?>>, F extends Field<? exte
      * Metodo da utilizzare per
      * preparare il campo e i giocatori
      * per giocare la partita
+     *
+     * @return la partita inizializzata
      */
-    void initialize();
+    Match<D,F> initialize();
 
     /**
      * Metodo da utilizzare per

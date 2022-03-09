@@ -3,7 +3,9 @@ package it.cs.unicam.pa2021.briscola;
 import it.cs.unicam.pa2021.giochidicarte.classiccards.trevigianecards.TrevigianaCard;
 import it.cs.unicam.pa2021.giochidicarte.classicdeck.TrevigianeDeck;
 import it.cs.unicam.pa2021.giochidicarte.match.AbstractMatchMultiplayer;
+import it.cs.unicam.pa2021.giochidicarte.match.Match;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
@@ -42,22 +44,27 @@ public class BriscolaMatch extends AbstractMatchMultiplayer<BriscolaPlayer, Trev
         return this.getDeck().removeCard(0);
     }
 
-    private BriscolaPlayerBot inizializationPlayers(BriscolaPlayer... players) {
+    private List<BriscolaPlayer> inizializationPlayers(BriscolaPlayer... players) {
         BriscolaPlayerBot bot;
+        List<BriscolaPlayer> playersInitialized = new ArrayList<>();
         if (players[0] instanceof BriscolaPlayerBot) {
             bot = (BriscolaPlayerBot) players[0];
             bot.getHand().addCards(this.getDeck().removeNCardsFromTop(3));
             players[1].getHand().addCards(this.getDeck().removeNCardsFromTop(3));
+            playersInitialized.add(bot);
+            playersInitialized.add(players[1]);
         } else {
             players[0].getHand().addCards(this.getDeck().removeNCardsFromTop(3));
             bot = (BriscolaPlayerBot) players[1];
             bot.getHand().addCards(this.getDeck().removeNCardsFromTop(3));
+            playersInitialized.add(players[0]);
+            playersInitialized.add(bot);
         }
-        return bot;
+        return playersInitialized;
     }
 
     @Override
-    public void initialize() {
+    public Match<TrevigianeDeck,BriscolaField> initialize() {
         System.out.println("Benvenuti nel gioco della briscola");
         TrevigianaCard cartaBriscola = briscola();
         this.getField().addCard(cartaBriscola);
@@ -66,8 +73,9 @@ public class BriscolaMatch extends AbstractMatchMultiplayer<BriscolaPlayer, Trev
         int idSecondPlayer = second(idFirstPlayer);
         BriscolaPlayer firstPlayer = this.getSinglePlayerInGameById(idFirstPlayer);
         BriscolaPlayer secondPlayer = this.getSinglePlayerInGameById(idSecondPlayer);
-        BriscolaPlayerBot bot = this.inizializationPlayers(firstPlayer,secondPlayer);
         System.out.println("Il giocatore iniziale è: " + firstPlayer);
+        List<BriscolaPlayer> players = this.inizializationPlayers(firstPlayer, secondPlayer);
+        return new BriscolaMatch(players,this.getDeck(),this.getField());
     }
 
     @Override

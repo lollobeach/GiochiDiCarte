@@ -48,7 +48,7 @@ public abstract class AbstractMatchMultiplayer<P extends Player<? extends Card<?
     }
 
     @Override
-    public abstract void initialize();
+    public abstract Match<D,F> initialize();
 
     @Override
     public abstract void execute();
