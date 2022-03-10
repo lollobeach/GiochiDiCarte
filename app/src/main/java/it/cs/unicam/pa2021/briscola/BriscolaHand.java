@@ -7,6 +7,7 @@ import it.cs.unicam.pa2021.giochidicarte.player.AbstractHandToDraw;
 import java.util.List;
 import java.util.stream.IntStream;
 
+
 public class BriscolaHand extends AbstractHandToDraw<TrevigianaCard, TrevigianeDeck> {
 
     public BriscolaHand() {

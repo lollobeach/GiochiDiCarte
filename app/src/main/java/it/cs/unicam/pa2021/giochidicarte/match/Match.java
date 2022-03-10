@@ -4,6 +4,8 @@ import it.cs.unicam.pa2021.giochidicarte.Card;
 import it.cs.unicam.pa2021.giochidicarte.deck.Deck;
 import it.cs.unicam.pa2021.giochidicarte.field.Field;
 
+import java.io.IOException;
+
 /**
  * Interfaccia che rappresenta una generica
  * partita di carte
@@ -42,5 +44,5 @@ public interface Match<D extends Deck<? extends Card<?>>, F extends Field<? exte
      * Metodo da utilizzare per
      * l'implementazione delle regole
      */
-    void execute();
+    void execute() throws IOException;
 }

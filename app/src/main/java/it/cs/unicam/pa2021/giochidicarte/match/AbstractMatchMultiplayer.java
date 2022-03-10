@@ -5,6 +5,7 @@ import it.cs.unicam.pa2021.giochidicarte.deck.Deck;
 import it.cs.unicam.pa2021.giochidicarte.field.Field;
 import it.cs.unicam.pa2021.giochidicarte.player.Player;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -51,5 +52,5 @@ public abstract class AbstractMatchMultiplayer<P extends Player<? extends Card<?
     public abstract Match<D,F> initialize();
 
     @Override
-    public abstract void execute();
+    public abstract void execute() throws IOException;
  }

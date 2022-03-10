@@ -10,10 +10,9 @@ public class BriscolaHandBot extends BriscolaHand {
         super();
     }
 
-    @Override
-    public TrevigianaCard playCard(int pos) {
+    public TrevigianaCard playCard() {
         Random random = new Random();
-        int card = random.nextInt(pos);
-        return this.removeCard(card);
+        int card = random.nextInt(3);
+        return this.playCard(card);
     }
 }

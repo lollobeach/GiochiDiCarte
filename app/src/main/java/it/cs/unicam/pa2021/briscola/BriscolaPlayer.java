@@ -28,11 +28,4 @@ public class BriscolaPlayer extends AbstractPlayer<TrevigianaCard, BriscolaHand>
         Arrays.stream(cards).forEach(getWonCards()::add);
     }
 
-    @Override
-    public String toString() {
-        return "BriscolaPlayer{" +
-                "name='" + name + '\'' +
-                ", wonCards=" + wonCards +
-                '}';
-    }
 }
