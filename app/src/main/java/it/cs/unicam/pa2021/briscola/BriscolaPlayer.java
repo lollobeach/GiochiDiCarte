@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+//TODO fare classe astratta e metodo astratto playCard(), creare due sottoclassi briscolaPlayer anche per il bot
+
 public class BriscolaPlayer extends AbstractPlayer<TrevigianaCard, BriscolaHand> {
 
     private final String name;

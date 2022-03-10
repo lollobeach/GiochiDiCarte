@@ -6,6 +6,8 @@ public class BriscolaPlayerBot extends BriscolaPlayer {
         super(name, hand);
     }
 
+
+
     @Override
     public BriscolaHandBot getHand() {
         return (BriscolaHandBot) super.getHand();

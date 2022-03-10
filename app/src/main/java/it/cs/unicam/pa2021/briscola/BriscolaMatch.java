@@ -48,6 +48,7 @@ public class BriscolaMatch extends AbstractMatchMultiplayer<BriscolaPlayer, Trev
         return this.getDeck().removeCard(0);
     }
 
+    //TODO controllare se inserire nel costruttore
     @Override
     public Match<TrevigianeDeck,BriscolaField> initialize() {
         System.out.println("Benvenuti nel gioco della briscola");
@@ -67,6 +68,7 @@ public class BriscolaMatch extends AbstractMatchMultiplayer<BriscolaPlayer, Trev
         return new BriscolaMatch(players,this.getDeck(),this.getField());
     }
 
+    //TODO togliere la riga 74
     @Override
     public void execute() throws IOException {
         BriscolaMatch match = (BriscolaMatch) initialize();
@@ -75,6 +77,13 @@ public class BriscolaMatch extends AbstractMatchMultiplayer<BriscolaPlayer, Trev
         BriscolaPlayer secondPlayer = match.getPlayersInGame().get(1);
         BriscolaPlayerBot bot;
         String card;
+        match.getPlayersInGame().forEach(player -> {
+            if (player instanceof BriscolaPlayerBot) {
+
+            } else {
+
+            }
+        });
         if (firstPlayer instanceof BriscolaPlayerBot) {
             bot = (BriscolaPlayerBot) firstPlayer;
             TrevigianaCard playedCardByBot = bot.getHand().playCard();
