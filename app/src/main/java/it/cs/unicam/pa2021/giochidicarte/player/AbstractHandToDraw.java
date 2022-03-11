@@ -26,7 +26,7 @@ public abstract class AbstractHandToDraw<C extends Card<?>, L extends PileCards<
     public void addCards(List<C> cards) { this.getCards().addAll(cards); }
 
     @Override
-    public abstract C playCard(int pos);
+    public abstract C playCard();
 
     @Override
     public abstract C drawCard(L from, int pos);

@@ -8,16 +8,14 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 
-public class BriscolaHand extends AbstractHandToDraw<TrevigianaCard, TrevigianeDeck> {
+public abstract class BriscolaHand extends AbstractHandToDraw<TrevigianaCard, TrevigianeDeck> {
 
     public BriscolaHand() {
         super();
     }
 
     @Override
-    public TrevigianaCard playCard(int pos) {
-        return this.removeCard(pos);
-    }
+    public abstract TrevigianaCard playCard();
 
     @Override
     public TrevigianaCard drawCard(TrevigianeDeck from, int pos) {

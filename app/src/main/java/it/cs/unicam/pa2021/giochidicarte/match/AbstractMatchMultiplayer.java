@@ -5,7 +5,6 @@ import it.cs.unicam.pa2021.giochidicarte.deck.Deck;
 import it.cs.unicam.pa2021.giochidicarte.field.Field;
 import it.cs.unicam.pa2021.giochidicarte.player.Player;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -20,7 +19,7 @@ import java.util.function.Predicate;
  */
 public abstract class AbstractMatchMultiplayer<P extends Player<? extends Card<?>>, D extends Deck<? extends Card<?>>,F extends Field<? extends Card<?>>> implements MatchMultiplayer<P,D,F> {
 
-    private final List<P> players;
+    private List<P> players;
     private final D deck;
     private final F field;
 
@@ -34,6 +33,8 @@ public abstract class AbstractMatchMultiplayer<P extends Player<? extends Card<?
     public List<P> getPlayersInGame() {
         return this.players;
     }
+
+    public void setPlayersInGame(List<P> players) { this.players = players; }
 
     @Override
     public abstract P getWinnerPlayer(Predicate<P> p);
@@ -49,8 +50,8 @@ public abstract class AbstractMatchMultiplayer<P extends Player<? extends Card<?
     }
 
     @Override
-    public abstract Match<D,F> initialize();
+    public abstract void initialize();
 
     @Override
-    public abstract void execute() throws IOException;
+    public abstract void execute();
  }
