@@ -27,22 +27,9 @@ public abstract class AbstractField<C extends Card<?>> implements Field<C> {
     @Override
     public abstract void addCard(C card);
 
-    /*
-
-        if (card == null) { throw new NullPointerException("Carta non selezionata"); }
-        if (this.cardsInGame.contains(card)) { throw new IllegalArgumentException("Carta già presente"); }
-        this.cardsInGame.add(card);
-     */
-
     @Override
     public abstract void addCards(List<C> cards);
 
-    /*
-            if (cards == null || cards.size() == 0) { throw new NullPointerException("Carte non selezionate"); }
-        int check = (int) cards.stream().filter(i -> Collections.frequency(cards,i) > 1).count();
-        if (check > 0) { throw new IllegalArgumentException("Non sono ammessi i duplicati"); }
-        check = (int) cards.stream().filter(this.cardsInGame::contains).count();
-        if (check > 0) { throw new IllegalArgumentException("Tra le carte selezionate almeno una carta è già presente"); }
-        this.cardsInGame.addAll(cards);
-     */
+    @Override
+    public abstract List<C> removeCards(int nCards);
 }

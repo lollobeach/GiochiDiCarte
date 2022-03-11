@@ -35,6 +35,52 @@ public abstract class AbstractDeck<C extends Card<?>> implements Deck<C> {
     public abstract void addCards(List<C> cards);
 
     /**
+     * Il metodo, di base, rimuove le carte
+     * dalla cima del mazzo.
+     * E' possibile modificarne il comportamento
+     * sovrascrivendolo
+     *
+     * @param nCards numero di carte
+     *               da rimuovere
+     *
+     * @throws IllegalArgumentException se
+     * nCards &egrave;
+     *  - uguale a 0
+     *  - maggiore del numero delle carte
+     *  presenti nel mazzo
+     *
+     * @return lista di carte rimosse
+     */
+    @Override
+    public List<C> removeCards(int nCards) {
+        if (nCards == 0 || nCards > this.nCards()) { throw new IllegalArgumentException("Numero di carte non valido!"); }
+        List<C> removed = new ArrayList<>();
+        for (int i = 0; i < nCards; i++) {
+            try {
+                removed.add(this.getCards().remove(0));
+            } catch (IndexOutOfBoundsException e) { break; }
+        }
+        return removed;
+    }
+
+    //    private List<C> removal(List<C> cards, int n, int j, Direction dir) {
+//        List<C> removed = new ArrayList<>();
+//        for (int i = 0; i < n; i++) {
+//            if (dir.equals(Direction.SU)) {
+//                removed.add(cards.remove(j));
+//                j--;
+//                if (j < 0) { break; }
+//            }
+//            if (dir.equals(Direction.GIU)) {
+//                try {
+//                    removed.add(cards.remove(j));
+//                } catch (IndexOutOfBoundsException e) { break; }
+//            }
+//        }
+//        return removed;
+//    }
+
+    /**
      * @param card carta di cui si
      *             vuole sapere la presenza
      *
@@ -71,57 +117,57 @@ public abstract class AbstractDeck<C extends Card<?>> implements Deck<C> {
         return count == cards.size();
     }
 
-    private List<C> removal(List<C> cards, int n, int j, Direction dir) {
-        List<C> removed = new ArrayList<>();
-        for (int i = 0; i < n; i++) {
-            if (dir.equals(Direction.SU)) {
-                removed.add(cards.remove(j));
-                j--;
-                if (j < 0) { break; }
-            }
-            if (dir.equals(Direction.GIU)) {
-                try {
-                    removed.add(cards.remove(j));
-                } catch (IndexOutOfBoundsException e) { break; }
-            }
-        }
-        return removed;
-    }
-
-    /**
-     * @param n numero di carte che si vuole
-     *          rimuovere
-     * @param pos indice di partenza per la rimozione
-     *            delle carte
-     * @param dir direzione da seguire per la rimozione
-     *            delle carte
-     *
-     * @throws IllegalArgumentException se n &egrave;:
-     * - minore di 0
-     * - maggiore del numero di carte presenti nel mazzo;
-     * oppure se pos &egrave;:
-     * - minore di 0
-     * - maggiore dell'ultimo indice della lista
-     * @throws NullPointerException se dir &egrave; null
-     *
-     * @return lista di carte rimosse
-     */
-    @Override
-    public List<C> removeNCardsFromPosition(int n, int pos, Direction dir) {
-        if (n <= 0 || n > nCards()) { throw new IllegalArgumentException("Numero non valido"); }
-        if (pos < 0 || pos > nCards() - 1) { throw new IllegalArgumentException("Posizione non valida"); }
-        if (dir == null) { throw new NullPointerException("Direction non inserita"); }
-        List<C> removed = new ArrayList<>();
-        if (dir.equals(Direction.SU)) { removed = removal(getCards(), n, pos, Direction.SU); }
-        if (dir.equals(Direction.GIU)) { removed = removal(getCards(), n, pos, Direction.GIU); }
-        return removed;
-    }
-
-    @Override
-    public List<C> removeNCardsFromBottom(int n) { return this.removeNCardsFromPosition(n, getCards().size()-1, Direction.SU); }
-
-    @Override
-    public List<C> removeNCardsFromTop(int n) { return this.removeNCardsFromPosition(n, 0, Direction.GIU); }
+//    private List<C> removal(List<C> cards, int n, int j, Direction dir) {
+//        List<C> removed = new ArrayList<>();
+//        for (int i = 0; i < n; i++) {
+//            if (dir.equals(Direction.SU)) {
+//                removed.add(cards.remove(j));
+//                j--;
+//                if (j < 0) { break; }
+//            }
+//            if (dir.equals(Direction.GIU)) {
+//                try {
+//                    removed.add(cards.remove(j));
+//                } catch (IndexOutOfBoundsException e) { break; }
+//            }
+//        }
+//        return removed;
+//    }
+//
+//    /**
+//     * @param n numero di carte che si vuole
+//     *          rimuovere
+//     * @param pos indice di partenza per la rimozione
+//     *            delle carte
+//     * @param dir direzione da seguire per la rimozione
+//     *            delle carte
+//     *
+//     * @throws IllegalArgumentException se n &egrave;:
+//     * - minore di 0
+//     * - maggiore del numero di carte presenti nel mazzo;
+//     * oppure se pos &egrave;:
+//     * - minore di 0
+//     * - maggiore dell'ultimo indice della lista
+//     * @throws NullPointerException se dir &egrave; null
+//     *
+//     * @return lista di carte rimosse
+//     */
+//    @Override
+//    public List<C> removeNCardsFromPosition(int n, int pos, Direction dir) {
+//        if (n <= 0 || n > nCards()) { throw new IllegalArgumentException("Numero non valido"); }
+//        if (pos < 0 || pos > nCards() - 1) { throw new IllegalArgumentException("Posizione non valida"); }
+//        if (dir == null) { throw new NullPointerException("Direction non inserita"); }
+//        List<C> removed = new ArrayList<>();
+//        if (dir.equals(Direction.SU)) { removed = removal(getCards(), n, pos, Direction.SU); }
+//        if (dir.equals(Direction.GIU)) { removed = removal(getCards(), n, pos, Direction.GIU); }
+//        return removed;
+//    }
+//
+//    @Override
+//    public List<C> removeNCardsFromBottom(int n) { return this.removeNCardsFromPosition(n, getCards().size()-1, Direction.SU); }
+//
+//    @Override
+//    public List<C> removeNCardsFromTop(int n) { return this.removeNCardsFromPosition(n, 0, Direction.GIU); }
 
     @Override
     public void shuffleDeck(int n) {

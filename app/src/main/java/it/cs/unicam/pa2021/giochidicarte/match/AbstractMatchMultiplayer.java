@@ -6,7 +6,6 @@ import it.cs.unicam.pa2021.giochidicarte.field.Field;
 import it.cs.unicam.pa2021.giochidicarte.player.Player;
 
 import java.util.List;
-import java.util.function.Predicate;
 
 /**
  * Classe astratta che permette di
@@ -35,9 +34,6 @@ public abstract class AbstractMatchMultiplayer<P extends Player<? extends Card<?
     }
 
     public void setPlayersInGame(List<P> players) { this.players = players; }
-
-    @Override
-    public abstract P getWinnerPlayer(Predicate<P> p);
 
     @Override
     public D getDeck() {

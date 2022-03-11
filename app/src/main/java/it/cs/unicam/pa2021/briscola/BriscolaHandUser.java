@@ -17,7 +17,7 @@ public class BriscolaHandUser extends BriscolaHand{
         System.out.println("0 -> "+this.cardInPosition(0));
         System.out.println("1 -> "+this.cardInPosition(1));
         System.out.println("2 -> "+this.cardInPosition(2));
-        String cardPlayed = "null";
+        String cardPlayed = "";
         try {
             cardPlayed = reader.readLine();
         } catch (IOException e) {

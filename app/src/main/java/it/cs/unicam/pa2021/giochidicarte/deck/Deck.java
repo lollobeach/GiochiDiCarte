@@ -42,44 +42,6 @@ public interface Deck<C extends Card<?>> extends PileCards<C> {
     boolean cardsArePresents(List<C> cards);
 
     /**
-     * Metodo che permette di rimuovere
-     * un numero di carte dal mazzo partendo
-     * da una posizione scelta
-     *
-     * @param n numero di carte che si vuole
-     *          rimuovere
-     * @param pos indice di partenza per la rimozione
-     *            delle carte
-     * @param dir direzione da seguire per la rimozione
-     *            delle carte
-     *
-     * @return lista di carte rimosse
-     */
-    List<C> removeNCardsFromPosition(int n, int pos, Direction dir);
-
-    /**
-     * Metodo che permette di rimuovere
-     * un numero di carte dal fondo del mazzo
-     *
-     * @param n numero di carte che si vogliono
-     *          rimuovere
-     *
-     * @return lista di carte rimosse
-     */
-    List<C> removeNCardsFromBottom(int n);
-
-    /**
-     * Metodo che permette di rimuovere
-     * un numero di carte dalla cima del mazzo
-     *
-     * @param n numero di carte che si vogliono
-     *          rimuovere
-     *
-     * @return lista di carte rimosse
-     */
-    List<C> removeNCardsFromTop(int n);
-
-    /**
      * Metodo che permette di mischiare
      * il mazzo
      *

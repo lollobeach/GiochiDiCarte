@@ -1,11 +1,15 @@
 package it.cs.unicam.pa2021.briscola;
 
-import it.cs.unicam.pa2021.giochidicarte.PileCards;
 import it.cs.unicam.pa2021.giochidicarte.classiccards.trevigianecards.TrevigianaCard;
 
-import java.util.List;
 import java.util.Random;
 
+/**
+ * Classe che rappresenta la
+ * mano di un bot.
+ * La carta da giocare viene scelta
+ * in modo randomico
+ */
 public class BriscolaHandBot extends BriscolaHand {
 
     public BriscolaHandBot() {

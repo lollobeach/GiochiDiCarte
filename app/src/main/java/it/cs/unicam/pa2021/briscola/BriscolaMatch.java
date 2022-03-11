@@ -8,9 +8,8 @@ import it.cs.unicam.pa2021.giochidicarte.match.AbstractMatchMultiplayer;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.Random;
-import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 /**
  * Classe che rappresenta un partita di briscola 1 vs 1
@@ -20,15 +19,6 @@ public class BriscolaMatch extends AbstractMatchMultiplayer<BriscolaPlayer, Trev
     public BriscolaMatch(List<BriscolaPlayer> players, TrevigianeDeck deck, BriscolaField briscolaField) {
         super(players, deck, briscolaField);
         this.initialize();
-    }
-
-    @Override
-    public BriscolaPlayer getWinnerPlayer(Predicate<BriscolaPlayer> p) {
-        Optional<BriscolaPlayer> opt = getPlayersInGame().stream().filter(p).findFirst();
-        if (opt.isPresent()) {
-            System.out.println("Il vincitore è il giocatore: " + opt.get().getName() + " - " + opt.get().getId());
-            return opt.get(); }
-        return null;
     }
 
     private int first() {
@@ -67,10 +57,6 @@ public class BriscolaMatch extends AbstractMatchMultiplayer<BriscolaPlayer, Trev
 
     @Override
     public void execute() {
-//        BriscolaPlayer firstPlayer = this.getPlayersInGame().get(0);
-//        BriscolaPlayer secondPlayer = this.getPlayersInGame().get(1);
-//        BriscolaPlayerBot bot;
-//        String card;
         BriscolaPlayer firstPlayer = this.getPlayersInGame().get(0);
         BriscolaPlayer secondPlayer = this.getPlayersInGame().get(1);
         this.setPlayersInGame(this.checkWinRound(firstPlayer,secondPlayer));
@@ -83,26 +69,29 @@ public class BriscolaMatch extends AbstractMatchMultiplayer<BriscolaPlayer, Trev
             this.getPlayersInGame().get(1).getHand().drawCard(this.getDeck(),0);
             this.checkWinRound(this.getPlayersInGame().get(0),this.getPlayersInGame().get(1));
         }
+        int pointsFirstPlayer = this.sumPoints(this.getPlayersInGame().get(0).getWonCards());
+        if (pointsFirstPlayer > 60) {
+            System.out.println("Il vincitore della partita è: "+this.getPlayersInGame().get(0).getName());
+        } else if (pointsFirstPlayer < 60) {
+            System.out.println("Il vincitore della partita è: "+this.getPlayersInGame().get(1).getName());
+        } else {
+            System.out.println("La partita è finita con il pareggio");
+        }
     }
 
-//            if (firstPlayer instanceof BriscolaPlayerBot) {
-//        bot = (BriscolaPlayerBot) firstPlayer;
-//        TrevigianaCard playedCardByBot = bot.getHand().playCard();
-//        this.getField().addCard(playedCardByBot);
-//        System.out.println("Carta giocata dal bot: "+playedCardByBot);
-//        System.out.println("Briscola sul campo: "+this.getField().cardInPosition(0));
-//        System.out.println("Carte in mano:"+secondPlayer.getHand().getCards());
-//        System.out.println("0 -> "+secondPlayer.getHand().cardInPosition(0)+"\n1 -> "+secondPlayer.getHand().cardInPosition(1)
-//                +"\n2 -> "+secondPlayer.getHand().cardInPosition(2));
-//        System.out.println("E' il tuo turno:");
-//        card = reader.readLine();
-//        int cardToPlay = Integer.parseInt(card);
-//        TrevigianaCard playedCardByUser = secondPlayer.getHand().playCard();
-//        this.getField().addCard(playedCardByUser);
-//        System.out.println("Carta giocata: "+playedCardByUser);
-//        System.out.println("Carte in tavola:\n"+playedCardByBot+"\n"+playedCardByUser);
-//
-//    }
+    private int sumPoints(List<TrevigianaCard> cards) {
+        List<TrevigianaCard> points = cards.stream().filter(x -> x.getFigures() != null || x.getIndex() == 3).collect(Collectors.toList());
+        if (points.isEmpty()) { return 0; }
+        int sum = 0;
+        for(TrevigianaCard card: points) {
+            if (card.getFigures().equals(TrevigianeFigures.ASSE)) sum += 11;
+            if (card.getFigures().equals(TrevigianeFigures.RE)) sum += 4;
+            if (card.getFigures().equals(TrevigianeFigures.CAVALLO)) sum += 3;
+            if (card.getFigures().equals(TrevigianeFigures.FANTE)) sum += 2;
+            if (card.getIndex() == 3) sum += 10;
+        }
+        return sum;
+    }
 
     private List<BriscolaPlayer> checkWinRound(BriscolaPlayer firstPlayer, BriscolaPlayer secondPlayer) {
         List<BriscolaPlayer> players = this.getPlayersInGame();
@@ -119,13 +108,9 @@ public class BriscolaMatch extends AbstractMatchMultiplayer<BriscolaPlayer, Trev
         firstCard.equals(caseWithSameSeeds(firstCard,secondCard))) {
             System.out.println("Il vincitore della mano è: "+firstPlayer);
             firstPlayer.winCards(firstCard,secondCard);
-//            firstPlayer.getHand().drawCard(this.getDeck(), 0);
-//            secondPlayer.getHand().drawCard(this.getDeck(),0);
         } else {
             System.out.println("Il vincitore della mano è: "+secondPlayer);
             secondPlayer.winCards(firstCard,secondCard);
-//            secondPlayer.getHand().drawCard(this.getDeck(),0);
-//            firstPlayer.getHand().drawCard(this.getDeck(),0);
             players.clear();
             players.add(secondPlayer);
             players.add(firstPlayer);
