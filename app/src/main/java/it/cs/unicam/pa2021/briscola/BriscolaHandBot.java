@@ -8,7 +8,7 @@ import java.util.Random;
  * Classe che rappresenta la
  * mano di un bot.
  * La carta da giocare viene scelta
- * in modo randomico
+ * in modo casuale
  */
 public class BriscolaHandBot extends BriscolaHand {
 
@@ -19,9 +19,9 @@ public class BriscolaHandBot extends BriscolaHand {
     @Override
     public TrevigianaCard playCard() {
         Random random = new Random();
-        int card = random.nextInt();
-        System.out.println("Carta giocata dal bot: "+this.cardInPosition(card));
-        return this.removeCard(card);
+        int card = random.nextInt(this.nCards());
+        System.out.println("Carta giocata dal bot: "+this.cardInPosition(card)+"\n");
+        return this.removeCardInPos(card);
     }
 
 }

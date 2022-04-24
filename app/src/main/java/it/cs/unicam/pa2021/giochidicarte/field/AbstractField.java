@@ -31,5 +31,5 @@ public abstract class AbstractField<C extends Card<?>> implements Field<C> {
     public abstract void addCards(List<C> cards);
 
     @Override
-    public abstract List<C> removeCards(int nCards);
+    public abstract List<C> removeNCards(int nCards);
 }

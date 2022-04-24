@@ -33,6 +33,14 @@ public abstract class AbstractMatchMultiplayer<P extends Player<? extends Card<?
         return this.players;
     }
 
+    /**
+     * Metodo che permette di modificare la lista
+     * dei giocatori in gioco.
+     * Pu&ograve; essere utile nel momento in cui
+     * bisogna decidere l'ordine di gioco dei giocatori
+     *
+     * @param players lista nuova di giocatori
+     */
     public void setPlayersInGame(List<P> players) { this.players = players; }
 
     @Override
@@ -50,4 +58,4 @@ public abstract class AbstractMatchMultiplayer<P extends Player<? extends Card<?
 
     @Override
     public abstract void execute();
- }
+}
