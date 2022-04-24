@@ -5,6 +5,12 @@ import it.cs.unicam.pa2021.giochidicarte.PileCards;
 
 import java.util.List;
 
+/**
+ * Interfaccia che va a definire una generica
+ * mano, contenente delle carte, di un giocatore
+ *
+ * @param <C> tipo di carte contenute nella mano
+ */
 public interface HandToDraw<C extends Card<?>> extends PlayerHand<C>, PileCards<C> {
 
     /**

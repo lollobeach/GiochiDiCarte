@@ -34,7 +34,13 @@ public abstract class AbstractHandToDraw<C extends Card<?>> implements HandToDra
     public void addCards(List<C> cards) { this.getCards().addAll(cards); }
 
     @Override
-    public List<C> removeCards(int nCards) {
+    public abstract void removeCard(C card);
+
+    @Override
+    public abstract void removeListCards(List<C> cards);
+
+    @Override
+    public List<C> removeNCards(int nCards) {
         throw new UnsupportedOperationException();
     }
 

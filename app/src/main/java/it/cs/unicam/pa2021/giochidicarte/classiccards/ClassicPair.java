@@ -18,18 +18,40 @@ public class ClassicPair<S extends Seeds> {
         this.seed = seed;
     }
 
+    /**
+     * Metodo che ritorna l'indice della carta
+     *
+     * @return indice carta
+     */
     public int getId() {
         return this.index;
     }
 
+    /**
+     * Metodo che permette di modificare
+     * l'indice della carta
+     *
+     * @param newIndex nuovo indice
+     */
     public void setId(int newIndex) {
         this.index = newIndex;
     }
 
+    /**
+     * Metodo che ritorna il seme della carta
+     *
+     * @return seme carta
+     */
     public S getSeed() {
         return this.seed;
     }
 
+    /**
+     * Metodo che permette di modificare
+     * il seme della carta
+     *
+     * @param newSeed nuovo seme
+     */
     public void setSeed(S newSeed) {
         this.seed = newSeed;
     }
@@ -50,7 +72,7 @@ public class ClassicPair<S extends Seeds> {
         ClassicPair<?> that = (ClassicPair<?>) o;
 
         if (index != that.index) return false;
-        return seed.equals(that.seed);
+        return seed == that.seed;
     }
 
     @Override

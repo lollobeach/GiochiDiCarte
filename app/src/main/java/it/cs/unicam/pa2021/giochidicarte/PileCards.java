@@ -1,9 +1,6 @@
 package it.cs.unicam.pa2021.giochidicarte;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -58,18 +55,8 @@ public interface PileCards<C extends Card<?>> {
      * carta dall'insieme di carte
      *
      * @param card carta che si vuole rimuovere
-     *
-     * @throws NullPointerException se la
-     * carte inserita &egrave; null
-     * @throws IllegalArgumentException se la
-     * carte che si vuole eliminare non &egrave; presente
-     * nell'insieme
      */
-    default void removeCard(C card) {
-        if (card == null) { throw new NullPointerException("La carta non è stata selezionata"); }
-        if (!getCards().contains(card)) { throw new IllegalArgumentException("La carta non è presente nell'insieme"); }
-        getCards().remove(card);
-    }
+    void removeCard(C card);
 
     /**
      * Metodo che permette di rimuovere una lista
@@ -77,24 +64,8 @@ public interface PileCards<C extends Card<?>> {
      *
      * @param cards lista contenenti le
      *              carte che si vogliono rimuovere
-     *
-     * @throws NullPointerException se la lista delle carte
-     * &egrave; null o se &egrave; vuota
-     * @throws IllegalArgumentException se il numero delle carte
-     * selezionate supera il numero delle carte presenti nel campo da gioco
-     * o se la lista:
-     *  - contiene duplicati
-     *  - contiene almeno una carta non presente nel campo
      */
-    default void removeCards(List<C> cards) {
-        if (cards == null || cards.size() == 0) { throw new NullPointerException("Carte non selezionate"); }
-        if (cards.size() > nCards()) { throw new IllegalArgumentException("Il numero di carte selezionate è maggiore del numero di carte presenti nell'insieme"); }
-        int check = (int) cards.stream().filter(i -> Collections.frequency(cards,i) > 1).count();
-        if (check > 0) { throw new IllegalArgumentException("Non sono ammessi i duplicati"); }
-        check = (int) cards.stream().filter(this.getCards()::contains).count();
-        if (check != cards.size()) { throw new IllegalArgumentException("Tra le carte selezionate almeno una carta non è presente nell'insieme"); }
-        this.getCards().removeAll(cards);
-    }
+    void removeListCards(List<C> cards);
 
     /**
      * Metodo che permette di rimuovere
@@ -112,7 +83,7 @@ public interface PileCards<C extends Card<?>> {
      * @return carta rimossa nella determinata
      * posizione
      */
-    default C removeCard(int pos) {
+    default C removeCardInPos(int pos) {
         if (pos < 0 || pos > nCards()-1) { throw new IllegalArgumentException("Posizione non valida"); }
         return getCards().remove(pos);
     }
@@ -126,7 +97,7 @@ public interface PileCards<C extends Card<?>> {
      *
      * @return lista di carte rimosse
      */
-    List<C> removeCards(int nCards);
+    List<C> removeNCards(int nCards);
 
     /**
      * Metodo che permette di rimuovere
@@ -147,9 +118,9 @@ public interface PileCards<C extends Card<?>> {
      *
      * @return lista di carte rimosse
      */
-    default List<C> removeCards(int... pos) {
-        if (pos.length == 0) { throw new NullPointerException("Non è stata selzionata alcuna carta"); }
-        if (pos.length > nCards()) { throw new IllegalArgumentException("Il numero di indici presenti è maggiore del numero delle carte nell'insieme"); }
+    default List<C> removeCardsInPositions(int... pos) {
+        if (pos.length == 0) { throw new NullPointerException("Non e' stata selezionata alcuna carta"); }
+        if (pos.length > nCards()) { throw new IllegalArgumentException("Il numero di indici presenti e' maggiore del numero delle carte nell'insieme"); }
         int check = (int) Arrays.stream(pos).filter(i -> i < 0 || i > nCards()-1).count();
         if (check > 0) { throw new IllegalArgumentException("Indici non validi"); }
         List<Integer> listPos = Arrays.stream(pos).boxed().collect(Collectors.toList());
@@ -177,7 +148,7 @@ public interface PileCards<C extends Card<?>> {
      * selezionata
      */
     default C cardInPosition(int pos) {
-        if (pos < 0 || pos > nCards()-1) { throw new IllegalArgumentException("Indici non validi"); }
+        if (pos < 0 || pos > nCards()-1) { throw new IllegalArgumentException("Indice non valido"); }
         return getCards().get(pos);
     }
 
@@ -203,8 +174,8 @@ public interface PileCards<C extends Card<?>> {
      * nelle posizioni scelte
      */
     default List<C> cardsInPositions(int... pos) {
-        if (pos.length == 0) { throw new NullPointerException("Non è stata selzionata alcuna carta"); }
-        if (pos.length > nCards()) { throw new IllegalArgumentException("Il numero di indici presenti è maggiore del numero delle carte nell'insieme"); }
+        if (pos.length == 0) { throw new NullPointerException("Non e' stata selezionata alcuna carta"); }
+        if (pos.length > nCards()) { throw new IllegalArgumentException("Il numero di indici presenti e' maggiore del numero delle carte nell'insieme"); }
         int check = (int) Arrays.stream(pos).filter(i -> i < 0 || i > nCards() - 1).count();
         if (check > 0) { throw new IllegalArgumentException("Indici non validi"); }
         List<C> cards = new ArrayList<>();
