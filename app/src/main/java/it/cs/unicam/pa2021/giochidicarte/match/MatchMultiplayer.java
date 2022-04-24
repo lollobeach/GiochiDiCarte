@@ -7,8 +7,6 @@ import it.cs.unicam.pa2021.giochidicarte.player.Player;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 /**
  * Interfaccia che rappresenta una generica
@@ -58,29 +56,4 @@ public interface MatchMultiplayer<P extends Player<? extends Card<?>>, D extends
         return player.get();
     }
 
-    /**
-     * Metodo che ritorna il giocatore
-     * vincitore della partita
-     *
-     * @param p predicato usato per
-     *          determinare il giocatore
-     *          vincitore
-     *
-     * @return giocatore che soddisfa il predicatp
-     */
-    P getWinnerPlayer(Predicate<P> p);
-
-    /**
-     * Metodo che ritorna tutti i giocatori
-     * vincitori della partita
-     *
-     * @param p predicato usato per
-     *          determinare i giocatori
-     *          vincitori
-     *
-     * @return giocatori che soddisfano il predicato
-     */
-    default List<P> getWinnersPlayers(Predicate<P> p) {
-        return getPlayersInGame().stream().filter(x -> x==getWinnerPlayer(p)).collect(Collectors.toList());
-    }
 }

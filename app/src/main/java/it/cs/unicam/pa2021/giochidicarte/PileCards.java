@@ -119,6 +119,17 @@ public interface PileCards<C extends Card<?>> {
 
     /**
      * Metodo che permette di rimuovere
+     * un numero di carte a scelta
+     *
+     * @param nCards numero di carte
+     *               da rimuovere
+     *
+     * @return lista di carte rimosse
+     */
+    List<C> removeCards(int nCards);
+
+    /**
+     * Metodo che permette di rimuovere
      * una serie di carte scelte dalle
      * posizioni selezionate
      *

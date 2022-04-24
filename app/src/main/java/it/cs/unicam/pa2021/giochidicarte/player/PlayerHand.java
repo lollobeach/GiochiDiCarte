@@ -8,10 +8,7 @@ public interface PlayerHand<C extends Card<?>> {
      * Metodo che permette di
      * giocare una carta
      *
-     * @param pos posizione della carta
-     *            che si vuole giocare
-     *
      * @return carta giocata
      */
-    C playCard(int pos);
+    C playCard();
 }

@@ -6,7 +6,15 @@ import it.cs.unicam.pa2021.giochidicarte.PileCards;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class AbstractHandToDraw<C extends Card<?>, L extends PileCards<C>> implements HandToDraw<C,L> {
+/**
+ * Classe astratta che definisce un
+ * insieme generico di carte possedute
+ * dalla mano di un giocatore
+ *
+ * @param <C> tipo di carte che il giocatore
+ *           ha in mano
+ */
+public abstract class AbstractHandToDraw<C extends Card<?>> implements HandToDraw<C> {
 
     private final List<C> cardsInHand;
 
@@ -26,13 +34,18 @@ public abstract class AbstractHandToDraw<C extends Card<?>, L extends PileCards<
     public void addCards(List<C> cards) { this.getCards().addAll(cards); }
 
     @Override
-    public abstract C playCard(int pos);
+    public List<C> removeCards(int nCards) {
+        throw new UnsupportedOperationException();
+    }
 
     @Override
-    public abstract C drawCard(L from, int pos);
+    public abstract C playCard();
 
     @Override
-    public abstract List<C> drawCards(L from, int nCards);
+    public abstract C drawCard(PileCards<C> from, int pos);
+
+    @Override
+    public abstract List<C> drawCards(PileCards<C> from, int nCards);
 
     @Override
     public String toString() {

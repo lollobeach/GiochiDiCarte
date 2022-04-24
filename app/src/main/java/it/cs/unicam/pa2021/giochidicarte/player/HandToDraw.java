@@ -5,7 +5,7 @@ import it.cs.unicam.pa2021.giochidicarte.PileCards;
 
 import java.util.List;
 
-public interface HandToDraw<C extends Card<?>, L extends PileCards<C>> extends PlayerHand<C>, PileCards<C> {
+public interface HandToDraw<C extends Card<?>> extends PlayerHand<C>, PileCards<C> {
 
     /**
      * Metodo che permette di
@@ -18,7 +18,7 @@ public interface HandToDraw<C extends Card<?>, L extends PileCards<C>> extends P
      *
      * @return carta pescata
      */
-    C drawCard(L from, int pos);
+    C drawCard(PileCards<C> from, int pos);
 
     /**
      * Metodo che permette di
@@ -31,5 +31,5 @@ public interface HandToDraw<C extends Card<?>, L extends PileCards<C>> extends P
      *
      * @return lista di carte pescate
      */
-    List<C> drawCards(L from, int nCards);
+    List<C> drawCards(PileCards<C> from, int nCards);
 }

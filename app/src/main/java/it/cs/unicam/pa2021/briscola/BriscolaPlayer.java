@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class BriscolaPlayer extends AbstractPlayer<TrevigianaCard, BriscolaHand> {
+public abstract class BriscolaPlayer extends AbstractPlayer<TrevigianaCard, BriscolaHand> {
 
     private final String name;
     private final List<TrevigianaCard> wonCards;
@@ -28,11 +28,4 @@ public class BriscolaPlayer extends AbstractPlayer<TrevigianaCard, BriscolaHand>
         Arrays.stream(cards).forEach(getWonCards()::add);
     }
 
-    @Override
-    public String toString() {
-        return "BriscolaPlayer{" +
-                "name='" + name + '\'' +
-                ", wonCards=" + wonCards +
-                '}';
-    }
 }

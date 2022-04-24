@@ -5,7 +5,12 @@ import it.cs.unicam.pa2021.giochidicarte.field.AbstractField;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 
+/**
+ * Classe che rappresenta un campo
+ * per giocare a Briscola
+ */
 public class BriscolaField extends AbstractField<TrevigianaCard> {
 
     public BriscolaField() {
@@ -27,6 +32,14 @@ public class BriscolaField extends AbstractField<TrevigianaCard> {
         List<TrevigianaCard> check = new ArrayList<>();
         cards.forEach(x -> checkAdd(check,x));
         this.getCards().addAll(cards);
+    }
+
+    @Override
+    public List<TrevigianaCard> removeCards(int nCards) {
+        if (nCards == 0 || nCards > this.nCards()) { throw new IllegalArgumentException("Numero non valido!"); }
+        List<TrevigianaCard> cards = new ArrayList<>();
+        IntStream.range(0,nCards).forEach(x -> cards.add(this.removeCard(0)));
+        return cards;
     }
 
     private void checkAdd(List<TrevigianaCard> list, TrevigianaCard card) {
